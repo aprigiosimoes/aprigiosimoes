@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Aprigio Simoes - Blog</title>
+    <title>Meu blog</title>
     <style>
       /* Define o layout da página */
       body {
@@ -15,14 +15,16 @@
       
       /* Define o estilo do lado esquerdo da página */
       .left {
-        width: 20%;
-        background-color: #f1f1f1;
+        width: 80%;
+        background-color: #444444;
+        color: white;
         padding: 20px;
       }
       
       /* Define o estilo do lado direito da página */
       .right {
-        flex-grow: 1;
+        width: 40%;
+        background-color: #aaaaaa;
         padding: 20px;
       }
       
@@ -50,37 +52,18 @@
         <h2>Rio de Janeiro</h2>
         <p id="rio"></p>
       </div>
-      <div class="weather">
-        <h2>São Paulo</h2>
-        <p id="sao-paulo"></p>
-      </div>
-      <div class="weather">
-        <h2>New York</h2>
-        <p id="new-york"></p>
-      </div>
-      <div class="weather">
-        <h2>Roma</h2>
-        <p id="roma"></p>
-      </div>
-      <div class="weather">
-        <h2>Tokyo</h2>
-        <p id="tokyo"></p>
-      </div>
     </div>
     <div class="right">
       <h1>Meu blog</h1>
       <!-- Adicione aqui o conteúdo do seu blog -->
     </div>
     <script>
-      /* Recupera os dados do tempo e exibe-os na página */
-      fetch("https://api.openweathermap.org/data/2.5/group?id=3451190,3448439,5128581,4219762,1850147&units=metric&appid=SUA_CHAVE_DE_API")
-        .then(response => response.json())
+      /* Recupera a temperatura do Rio de Janeiro e exibe na página */
+      fetch("https://wttr.in/riodejaneiro?format=%C,%t")
+        .then(response => response.text())
         .then(data => {
-          document.getElementById("rio").textContent = data.list[0].main.temp + "°C";
-          document.getElementById("sao-paulo").textContent = data.list[1].main.temp + "°C";
-          document.getElementById("new-york").textContent = data.list[2].main.temp + "°C";
-          document.getElementById("roma").textContent = data.list[3].main.temp + "°C";
-          document.getElementById("tokyo").textContent = data.list[4].main.temp + "°C";
+          const parts = data.trim().split(",");
+          document.getElementById("rio").textContent = `Temperatura: ${parts[1]} °C (${parts[0]})`;
         });
     </script>
   </body>
