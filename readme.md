@@ -1,0 +1,1 @@
+Linux é o poder
